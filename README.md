@@ -1,5 +1,5 @@
 # lauro
-**Welcome to the Lauro wiki!**
+**Welcome to the Lauro **
 
 A simple multiplayer game usign pygame !
 
