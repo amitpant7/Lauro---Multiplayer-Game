@@ -39,11 +39,15 @@ OLI_image = pygame.image.load(os.path.join('Assets', 'oli.jpg'))
 OLI = pygame.transform.scale(OLI_image, (OLI_WIDTH, OLI_HEIGHT))
 VOTE = pygame.transform.scale(pygame.image.load(
     os.path.join('Assets', 'vote.jpg')), (WIDTH, HEIGHT))
+APPLE_imgae = pygame.image.load(os.path.join('Assets', 'apple.png'))
+APPLE = pygame.transform.scale(APPLE_imgae, (13, 13))
+LAURO = pygame.transform.scale(pygame.image.load(
+    os.path.join('Assets', 'lauro.png')), (100, 20))
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 20)
 
-red_bullets = []
-yellow_bullets = []
+red_bullets = []  # red bullets= lauro
+yellow_bullets = []  # yellow bullets= apple
 
 
 winner_text = ""
@@ -64,9 +68,11 @@ def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_hea
     WIN.blit(OLI, (yellow.x, yellow.y))
     #WIN.blit(HAS,(red.x+80, red.y+40) )
     for bullet in red_bullets:
-        pygame.draw.rect(WIN, RED, bullet)
+        WIN.blit(LAURO, (bullet.x, bullet.y))
+        #pygame.draw.rect(WIN, RED, bullet)
     for bullet in yellow_bullets:
-        pygame.draw.rect(WIN, YELLOW, bullet)
+        WIN.blit(APPLE, (bullet.x, bullet.y))
+        #pygame.draw.rect(WIN, YELLOW, bullet)
 
     pygame.display.update()
 
@@ -154,15 +160,6 @@ def main():
         keys_pressed = pygame.key.get_pressed()
         red_handel_movement(keys_pressed, red)
         yellow_handel_movement(keys_pressed, yellow)
-
-        # Randomly Changing positon of OLI
-        # yellow.x += RAN1_OLI
-        # yellow.y += RAN2_OLI
-        # if (yellow.x > 800 or yellow.x < 300):
-        #     yellow.x = 600+random.randint(-100, 100)
-        # if(yellow.y > 420 or yellow.y < 0):
-        #     yellow.y = 90+random.randint(0, 50)
-
         handle_bullets(yellow_bullets, red_bullets, red, yellow)
         draw_window(red, yellow, red_bullets, yellow_bullets,
                     red_health, yellow_health)
